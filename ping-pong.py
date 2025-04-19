@@ -3,9 +3,7 @@ from pygame import *
 back = (200,255,255)
 win_width = 600
 win_height = 500
-window = display.set_mode(
-    (win_width, win_height)
-)
+window = display.set_mode((win_width, win_height))
 window.fill(back)
 
 class GameSprite(sprite.Sprite):
@@ -35,10 +33,17 @@ class Player(GameSprite):
         if keys[K_s] and self.rect.y < win_width - 80:
             self.rect.y += self.speed
 
+racket1 = Player('palka.png', 30,200,50,150,4)
+racket2 = Player('palka.png',520, 200,50,150,4)
+ball = GameSprite('tenis.png', 200,200,50,50,4)
 
+font.init()
+font1 = font.Font(None,35)
+lose1 = font1.render('Player 1 Lose!',True,(180,0,0))
+lose2 = font1.render('Player 2 Lose!',True,(180,0,0))
 
-
-
+speed_x = 3
+speed_y = 3
 
 game = True
 finish = False
@@ -52,18 +57,22 @@ while game:
 
     if finish != True:
         window.fill(back)
+        racket1.update_l()
+        racket2.update_r()
 
+        racket1.reset()
+        racket2.reset()
+        ball.reest()
+    display.update()
+    clock.tick(FPS)
 
-
-
+'''
 display.set_caption('пинг-понг')
 background = transform.scale(
     image.load('фон пинг-понга.jpg'),
     (win_width,win_height)
     )   
+'''
 
 
-
-display.update()
-clock.tick(FPS)
 
